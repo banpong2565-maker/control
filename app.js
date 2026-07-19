@@ -256,6 +256,13 @@ function getFirebaseErrorMessage(code) {
 }
 
 // =============================================================
+// --- UTILITIES ---
+// =============================================================
+function isAdmin() {
+  return AppState.user && AppState.user.role === 'admin';
+}
+
+// =============================================================
 // --- SESSION & USER ENVIRONMENT ---
 // =============================================================
 function setupUserEnvironment() {

@@ -31,17 +31,17 @@ service cloud.firestore {
                     && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
     
-    // Admin-only collections (e.g., shops, disbursements)
+    // Admin-only collections for write (e.g., shops, disbursements)
     match /shops/{shopId} {
-      // Allow read for everyone authenticated, or restrict to admin
-      // allow read: if request.auth != null;
-      allow read, write: if request.auth != null 
-                         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      allow read: if request.auth != null;
+      allow write: if request.auth != null 
+                   && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
     
     match /disbursements/{disbursementId} {
-      allow read, write: if request.auth != null 
-                         && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+      allow read: if request.auth != null;
+      allow write: if request.auth != null 
+                   && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
   }
 }

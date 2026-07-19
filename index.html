@@ -247,29 +247,8 @@
           createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
       }
-      
-      if (role === 'admin') {
-        window.location.href = 'admin.html';
-      } else {
-        // Regular user: hide login, show viewer dashboard
-        document.querySelector('.login-wrapper').style.display = 'none';
-        
-        let viewerDiv = document.getElementById('viewer-dashboard');
-        if (!viewerDiv) {
-          viewerDiv = document.createElement('div');
-          viewerDiv.id = 'viewer-dashboard';
-          viewerDiv.style.cssText = 'position:relative; z-index:10; padding:40px; background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); text-align:center; width: 100%; max-width: 500px; animation: slideUp 0.5s;';
-          viewerDiv.innerHTML = `
-            <div style="font-size: 3rem; color: var(--primary); margin-bottom: 16px;"><i class="fa-solid fa-user-check"></i></div>
-            <h2 style="margin-bottom: 8px;">เข้าสู่ระบบสำเร็จ</h2>
-            <p style="color: var(--muted); margin-bottom: 24px;">คุณกำลังเข้าใช้งานในฐานะ <strong>ผู้ใช้งานทั่วไป</strong> (Viewer)<br>สามารถดูข้อมูลส่วนนี้ได้เร็วๆ นี้</p>
-            <button onclick="firebase.auth().signOut().then(() => window.location.reload())" style="padding: 10px 20px; background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text); cursor: pointer; font-family: inherit;">
-              <i class="fa-solid fa-right-from-bracket"></i> ออกจากระบบ
-            </button>
-          `;
-          document.body.appendChild(viewerDiv);
-        }
-      }
+      // Redirect all authenticated users to admin.html
+      window.location.href = 'admin.html';
     } catch(e) {
       console.error('Error fetching role:', e);
       alert('เกิดข้อผิดพลาดในการตรวจสอบสิทธิ์ (Firestore) กรุณาตรวจสอบว่าเปิดใช้งาน Firestore Database แล้ว หรือ Rules อนุญาตให้ใช้งานได้: ' + e.message);

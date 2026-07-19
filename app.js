@@ -215,6 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       AppState.user = null;
       if (!isIndexPage) {
+        alert('กรุณาเข้าสู่ระบบก่อนเข้าใช้งานหน้านี้');
         window.location.href = 'index.html';
       }
     }

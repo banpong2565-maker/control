@@ -199,11 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Redirect logic
-        if (role === 'admin' && !isAdminPage) {
+        if (!isAdminPage) {
           window.location.href = 'admin.html';
-          return;
-        } else if (role !== 'admin' && isAdminPage) {
-          window.location.href = 'index.html';
           return;
         }
 

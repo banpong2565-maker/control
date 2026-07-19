@@ -1,5 +1,17 @@
 // =============================================================
 // app.js — ระบบทะเบียนคุมการเบิกจ่ายเงินร้านค้า
+
+const AppState = {
+  user: null,
+  activeTab: 'dashboard',
+  shops: [],
+  disbursements: [],
+  theme: 'light',
+  filters: { search: '', shop: '', status: '', startDate: '', endDate: '' },
+  pagination: { currentPage: 1, pageSize: 50 },
+  charts: { monthly: null, shop: null }
+};
+
 const elements = {
   loginContainer:           document.getElementById('login-container'),
   appContainer:             document.getElementById('app-container'),
@@ -579,9 +591,9 @@ function switchTab(tabName) {
 
   elements.tabContents.forEach(tab => {
     if (tab.id === `tab-${tabName}`) {
-      tab.style.display = 'block';
+      tab.classList.add('active');
     } else {
-      tab.style.display = 'none';
+      tab.classList.remove('active');
     }
   });
 
